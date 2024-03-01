@@ -13,7 +13,8 @@ In this grid we can make the word FATHER starting from F. Letter points are as f
 Thus, FATHER would earn 12*6=72 points.
 
 I implement the game as an environment in gymnasium (OpenAI gym). My initial implementation of the environment has the following details:
-#### State (observation):
+
+#### State (observation)
 ```
 "agent": spaces.Box(0, size - 1, shape=(2,), dtype=int),
 "board": spaces.Text(max_length=size*size,min_length=size*size,charset=string.ascii_uppercase),
