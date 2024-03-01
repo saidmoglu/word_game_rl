@@ -36,20 +36,25 @@ DQN implementation: For the RL part, I made use of DQN implementation based on e
 #### Initial result 
 I can train the agent to get a score of 0. In this case, the agent simply moves back and forth between 2 adjacent letters, without ever activating. So the agent didn’t learn to make any actual words and scoring points.
 
-### Follow up
+## Follow up
 Then I tried following:
 1- Negative reward for moving around in inactive state after a while. We want the agent to attempt to make words.
 2- Improve board generation: Instead of random letters, pick common letters more often to increase the number of valid words on the board. Most such games do this, a fully random board (i.e. uniformly picked letters) has very few possible words.
 3- Add more info to print out such as invalid move count, inactive move count, valid word count etc. to see what is happening in the learning process.
 
-Result:
-Looking at the printed values, it seems valid word count is increasing very slowly: Out of 10K episodes, only 621 ended due to a valid word. The rest has ended due to the step limit, which is 50. At this rate the model will have a very hard time learning actual words.
-Essentially, it is very unlikely for actual words to be made by random exploration, thus the model is unable to learn actual words.
-Average score remains negative. Penalties mostly come from the invalid words. The good this is that the model learns other things pretty well: Doesn’t do invalid actions, doesn’t spend too much time in inactive state, and doesn’t try to create too long words.
+#### Result
 
-### Follow up
+Looking at the printed values, it seems valid word count is increasing very slowly: Out of 10K episodes, only 621 ended due to a valid word. The rest has ended due to the step limit, which is 50. At this rate the model will have a very hard time learning actual words.
+
+Essentially, it is very unlikely for actual words to be made by random exploration, thus the model is unable to learn actual words.
+
+Average score remains negative. Penalties mostly come from the invalid words. The good thing is that the model learns other stuff pretty well: Doesn’t do invalid actions, doesn’t spend too much time in inactive state, and doesn’t try to create too long words.
+
+## Follow up
 I tried using only a subset of letters, so the model doesn’t need to learn a lot of new words.
 
-Result:
+#### Result
+
 I restricted the alphabet to 5 letters, ETAIN. Watching the gameplay, the model learned a few basic words such as tit, tat, tet, nan etc all made using a back and forth between the vowel and consonant letter. They are worth 9 points each. The model also learned to make a max length word to get the least possible penalty.
+
 Setting the alphabet back to the full size, and we get the old behavior back, in fact, valid word count goes down to 0 during training, the model just learns to make the longest possible words to minimize its penalty.
