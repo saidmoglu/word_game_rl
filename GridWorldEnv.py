@@ -143,7 +143,7 @@ class GridWorldEnv(gym.Env):
         # We need the following line to seed self.np_random
         super().reset(seed=seed)
         
-        self._board = ''.join(random_letter_short(self.size**2))
+        self._board = ''.join(random_letters(self.size**2))
         self._agent_location = np.array([0,0])
         self._word = ''
         self._active = 0
